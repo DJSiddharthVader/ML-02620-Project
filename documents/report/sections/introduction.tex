@@ -1,0 +1,83 @@
+\subsection{Problem \& Motivation}
+It goes without saying that cancer is an incredibly complex, variable disease affecting the expression of many, many genes.
+The catalysts of malignancy can also be quite variable, resulting from certain behavioural, environmental or genetic factors.
+Even though researchers and physicians have catalogued many oncogenes that are frequently the primary drivers of cancer, there is still significant heterogeneity among gene expression in tumors \cite{onco}.
+This heterogeneity, as well as the rise of next generation sequencing technology, is what is driving researchers to develop treatment strategies personalized to individual patients and even individual tumors.
+Having a better understanding of the genetic landscape and architecture of various cancers is critical to effective, timely and personalized treatments.
+
+Scientists are now able to accurately capture much of this information with genomic and transcriptomic data for an individual patient at a relatively low and relatively high throughput.
+However this is often too much information to be parsed in a timely manner, even by an experienced bioinformatician, let alone a physician.
+This is part of why machine learning methods have gained such popularity for biological applications, they are made to work with large volumes of data to produce instant predictions.
+Even if they only help guide the intuition of doctors they can be tremendously helpful, especially as we continue to generate more data and develop more robust, computationally efficient methods.
+But unlike a doctor machines are not able to show their work per se, a machine learning model cannot really tell you \emph{why} it says a patient has cancer.
+
+Much of machine learning work, especially when applied to medical diagnosis, if often training a model to preform some kind of classification task (e.g. diseased/non diseased).
+Most of the most successful machine learning methods applied to medical diagnosis problems are deep learning methods \cite{deep}.
+Such methods, while often capable of highly accurate and robust predictions offer little more that the actual diagnosis result.
+Consider a multilayer perceptron trained to diagnose cancer from gene expression data, the parameters learned for the intermediate layer nodes have no clear correspondence with which genes are actually important in making the prediction.
+If this model is wrong, not matter how unlikely, there is really no way to know without some further kind of testing or treatment which may have negative heath effects.
+Either someone who is diseased may not be recommended treatment it or someone who is not diseased undergoes a potentially harmful treatment.
+Being able to "debug" treatments and why they did/did not work is a crucial part of modern medicine, as the saying goes "it's called the medical practice for a reason".
+
+However not all machine learning approaches are as opaque as a neural network, many methods exists that have learned parameters that correspond to the actual features the model is trained on.
+In the case of transcriptomic data these features are genes, so getting some clue as to what the model is prioritizing can greatly help one understand where and why a model's prediction is right \emph{or} wrong.
+Instead of relying on black-box solvers perhaps we can build less accurate but more transparent models
+I want to show that using transparent models we can try and extract some relevant biological information about our problem, in this case lung cancer classification from transcriptomic data.
+Using the feature (gene) importances built into some of these simple, transparent methods we can hopefully understand more about lung cancer.
+As well I want to see how variable machine learning models are in terms of what is learned, even when applied to the same data for the same problem
+
+\subsection{Approach}
+Consider the following thought experiment, John goes to a job interview feeling woefully unprepared and sees another man, Smith, waiting outside the interviewer's office.
+Smith starts boasting about shows John the lucky coin in his pocket, does his interview and finishes, confiding in John that he is sure he will get the job.
+John believes that the man with a coin in his pocket will get the job and does his interview.
+During the interview John in offered the job over Smith and accepts, upon leaving he notices that he in fact has a coin in his pocket.
+John is right that the man with a coin in his pocket will get the job but for completely incorrect reasons.
+%
+In our cancer problem a model we don't want to use is ``black box solver'' specifically for the cases where it can end up like John.
+He may get it right but why he get's it right is just as important if not more for these kinds of problems.
+It is able to accurately predict a pateint's disease given the gene expression data but provides no interpretable information about how the features (sequencing results) relate to the diagnosis.
+Since I am working with biological data for diagnosis I want to use methods that are both accurate and informative.
+%
+Thankfully many classifiers are much more transparent than about what they are learning from the data and are much better for humans to interpret and dissect.
+For this goal I chose to use the following supervised learning methods
+\begin{itemize}
+    \item Random Forest
+    \item Support Vector Machine
+    \item Naive Bayes
+\end{itemize}
+Random forests provide decision paths for each tree and you can look at how informative certain splits or conditions in the data are.
+They also provide the relative importance or features (genes) which can be hugely beneficial for follow experiments and treatments (especially has gene therapies become usable).
+Similarly SVMs provide support vectors, points (patients) that are nearest to the decision boundaries and can help physicians come up with decision rules for diagnoses.
+They can also provide confidence levels for their classifications, as a function of the distance of a newly classified patient to the decision boundary.
+Naive Bayes is generative and builds a distribution of the underlying data which is used for classification.
+The naive assumption can also be relaxed for known clusters of genes to potentially improve performance and the method scales well to having many (in the case $\approx 20,000$) features.
+
+\subsection{Data}
+The data I am using is transcriptomic data from human lung samples.
+Specifically I am using 374 lung samples from the GTEx project and 601 Lung Adenocarcinoma samples from the TCGA project.
+The GTEx project was meant to collect "normal" gene expression data, normal in the sense that the individuals sampled did not have any specific health condition.
+This helps establish a baseline of what normal gene expression looks like for various tissues, in our case it shows us what genes we expect to be expressed in the lung.
+TCGA (The Cancer Genome Atlas) was another large project meant to collect various forms of data from (you guessed it) cancer tissues to see what drives cancer growth, both generally and in specific cancer types.
+In our case we use it to see what expression patterns are specific to lung cancer, such that they may help with diagnosis (classification) and shed light onto important processes that lung tumors accelerate or halt.
+
+In order to avoid processing the raw data myself I use data from the recount2 project, which has processed all of the raw GTEx and TCGA  sequence data to generate gene counts for each sample \cite{recount2}.
+They do this using a robust, standard pipeline to ensure that all of the count data is comparable.
+I specifically used the gene-level counts, so any read from the raw data that mapped anywhere thing the boundary of a gene (as defined by ensembl biomart) counts towards that gene, even if the reads represent two distinct transcripts.
+For more details about the specifics please refer to the original paper \cite{recount2}.
+I further filtered this data to only include counts for protein coding genes as defined by ensembl biomart ($\sim$ 20,000 genes).
+The gene counts and files specifying which samples were lung samples were downloaded from the recount website \href{https://jhubiostatistics.shinyapps.io/recount/}{\underline{here}}.
+I wrote custom bash and python scripts to clean and join all of the data for training the models.
+
+Due to various logistical issues with actually installing the recount package I could not use their provided normalization functions or access sequencing depth values.
+I elected to use quantile normalization since it does not require sample/gene specific information and is already implemented in \verb|scikit-learn|.
+
+The GO terms associated with each gene were also taken from ensembl biomart provided in the file \verb|./data/downloaded/gene_metadata.txt|.
+All other downloaded files (gene counts, lung sample ids, coding gene list) are in the \verb|./data/downloaded/| directory as well.
+
+%DEPRECIATED
+%with the application of machine learning methods we can help learn and parse the important pieces to help direct doctors in treating people.
+%Consider the relatively straight-forward task of cancer diagnosis, given some data about a patient you want to determine if they have cancer.
+%As a result of this coming up with effective, personalized treatment strategies can also be quite difficult since one needs to understand both the genes driving the disease and how to exploit them for theraputic targeting.
+%While cancer does vary between pateints, for many patients there are likely a handful of genes (oncogenes) that, when mutated, are the primary drivers of cancer growth \cite{onco}.
+%But to develop such treatments you often need lots of personal patient data, significantly more that can be parsed by trained bioinformaticians let alone physicians, especially in time to efficiently treat patients.
+

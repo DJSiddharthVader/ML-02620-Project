@@ -1,0 +1,249 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{onco}{article}{}
+      \name{author}{1}{}{%
+        {{hash=923e44af56a8b13c849c52b80a71ee32}{%
+           family={Croce},
+           familyi={C\bibinitperiod},
+           given={Carlo\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{923e44af56a8b13c849c52b80a71ee32}
+      \strng{fullhash}{923e44af56a8b13c849c52b80a71ee32}
+      \strng{bibnamehash}{923e44af56a8b13c849c52b80a71ee32}
+      \strng{authorbibnamehash}{923e44af56a8b13c849c52b80a71ee32}
+      \strng{authornamehash}{923e44af56a8b13c849c52b80a71ee32}
+      \strng{authorfullhash}{923e44af56a8b13c849c52b80a71ee32}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-4793, 1533-4406}
+      \field{journaltitle}{New England Journal of Medicine}
+      \field{month}{1}
+      \field{number}{5}
+      \field{title}{Oncogenes and {Cancer}}
+      \field{urlday}{17}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{volume}{358}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \field{pages}{502\bibrangedash 511}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1056/NEJMra072367
+      \endverb
+      \verb{urlraw}
+      \verb http://www.nejm.org/doi/abs/10.1056/NEJMra072367
+      \endverb
+      \verb{url}
+      \verb http://www.nejm.org/doi/abs/10.1056/NEJMra072367
+      \endverb
+    \endentry
+    \entry{deep}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f39d2ddba3d608427338dddba6b7990c}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Chunming},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c022d7d3bd3443403a5176847f45ca49}{%
+           family={Jackson},
+           familyi={J\bibinitperiod},
+           given={Scott\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \strng{fullhash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \strng{bibnamehash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \strng{authorbibnamehash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \strng{authornamehash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \strng{authorfullhash}{4e2e7d3394972fa35b38b27a8f55db75}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1474-760X}
+      \field{journaltitle}{Genome Biology}
+      \field{month}{12}
+      \field{number}{1}
+      \field{title}{Machine learning and complex biological data}
+      \field{urlday}{17}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{volume}{20}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \field{pages}{76\bibrangessep s13059--019--1689\bibrangedash}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1186/s13059-019-1689-0
+      \endverb
+      \verb{urlraw}
+      \verb https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1689-0
+      \endverb
+      \verb{url}
+      \verb https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1689-0
+      \endverb
+    \endentry
+    \entry{recount2}{article}{}
+      \name{author}{9}{}{%
+        {{hash=9ad4d60f4464662821030c7a58fbbb37}{%
+           family={Collado-Torres},
+           familyi={C\bibinithyphendelim T\bibinitperiod},
+           given={Leonardo},
+           giveni={L\bibinitperiod}}}%
+        {{hash=507aea49873d25f98f21db54a6f8ca84}{%
+           family={Nellore},
+           familyi={N\bibinitperiod},
+           given={Abhinav},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e1f06bac529db8b3ec3156828227215f}{%
+           family={Kammers},
+           familyi={K\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=c46036c155e5b3bfbdc991dfc490f202}{%
+           family={Ellis},
+           familyi={E\bibinitperiod},
+           given={Shannon\bibnamedelima E},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=ed29970740e0f865566da79e1c5c2ae7}{%
+           family={Taub},
+           familyi={T\bibinitperiod},
+           given={Margaret\bibnamedelima A},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=71145cbf8e4af22c79653e20f89c9782}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Kasper\bibnamedelima D},
+           giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=5a9a3e434a5e931190b7c2ddca4a75e9}{%
+           family={Jaffe},
+           familyi={J\bibinitperiod},
+           given={Andrew\bibnamedelima E},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=a8ce1a82e3e69aab1bb83e47384c8977}{%
+           family={Langmead},
+           familyi={L\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=98d8f47f2f866523902ddb51fdb38ff1}{%
+           family={Leek},
+           familyi={L\bibinitperiod},
+           given={Jeffrey\bibnamedelima T},
+           giveni={J\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{2807739ecea11a2f3698df4a5ce5e3bb}
+      \strng{fullhash}{9ea4b85433f8a4bd683a178b8e81f43d}
+      \strng{bibnamehash}{2807739ecea11a2f3698df4a5ce5e3bb}
+      \strng{authorbibnamehash}{2807739ecea11a2f3698df4a5ce5e3bb}
+      \strng{authornamehash}{2807739ecea11a2f3698df4a5ce5e3bb}
+      \strng{authorfullhash}{9ea4b85433f8a4bd683a178b8e81f43d}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1087-0156, 1546-1696}
+      \field{journaltitle}{Nature Biotechnology}
+      \field{month}{4}
+      \field{number}{4}
+      \field{title}{Reproducible {RNA}-seq analysis using recount2}
+      \field{urlday}{17}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{volume}{35}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{319\bibrangedash 321}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1038/nbt.3838
+      \endverb
+      \verb{urlraw}
+      \verb http://www.nature.com/articles/nbt.3838
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/nbt.3838
+      \endverb
+    \endentry
+    \entry{dv}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c18d2b02671870dc19e632ea6fc21c33}{%
+           family={Rybakov},
+           familyi={R\bibinitperiod},
+           given={Sergei},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a4278fda14e470e6a1b57d353d0f68ea}{%
+           family={Lotfollahi},
+           familyi={L\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e922f50549caa096ad5b259faec33127}{%
+           family={Theis},
+           familyi={T\bibinitperiod},
+           given={Fabian\bibnamedelima J},
+           giveni={F\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=8845642b615749845958a563fbfe8028}{%
+           family={Wold},
+           familyi={W\bibinitperiod},
+           given={F.\bibnamedelimi Alexander},
+           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{28aa4c492f96584a181f3a197f5e4f31}
+      \strng{fullhash}{24e1981d7c6b2d332808cf534386f90f}
+      \strng{bibnamehash}{24e1981d7c6b2d332808cf534386f90f}
+      \strng{authorbibnamehash}{24e1981d7c6b2d332808cf534386f90f}
+      \strng{authornamehash}{28aa4c492f96584a181f3a197f5e4f31}
+      \strng{authorfullhash}{24e1981d7c6b2d332808cf534386f90f}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv}
+      \field{title}{Learning interpretable latent autoencoder representations with annotations offeature sets}
+      \field{urlday}{17}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.biorxiv.org/content/biorxiv/early/2020/12/03/2020.12.02.401182.full.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.biorxiv.org/content/biorxiv/early/2020/12/03/2020.12.02.401182.full.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

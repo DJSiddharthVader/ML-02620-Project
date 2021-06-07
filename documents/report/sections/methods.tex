@@ -1,0 +1,74 @@
+\subsection{Machine Learning Methods}
+\paragraph{SVM}
+A support vector machine (SVM) is a machine learning model best suited for binary classification tasks.
+An SVM  when trained provides a decision boundary in sample space that best separates the samples by their label.
+So ideally only samples from the same class are on a given side of our learned boundary, however this may not be possible for non-linearly separable data, at least without some tricks.
+In fact we want to ensure our boundary separates the classes optimally, so we wan to maximize the dot product (distance) between and sample point and the boundary line itself.
+This is called the maximum-margin principle, the margin referring to the smallest distance between two samples with different labels.
+Maximizing this distance ensures that even our most ambiguous samples are made to be as distinct as possible in terms of how the decision boundary would classify them.
+
+This boundary is actually just a line in vector space so it can be represented by this simple equation
+$$ w'x+b=0$$
+where $w$ defines the line in space, $b$ is the bias and $x$ is any sample.
+Similarly you can define the lines parallel to the boundary that define the margin with
+\begin{align}
+    w'x+b &= 1 \\
+    w'x+b &= -1
+\end{align}
+which also defines restrictions for our model scheme i.e. for any sample $x$ in class 1 then $w'x+b \geq 1$ and for any sample in class 2 then $w'x+b \leq -1$.
+This is also how we classify new points with a learned SVM, we simply evolute the sign of $w'x_{new}+b$ to determine our class label.
+Note that no sample can be inside the margin due to how its defined, as even the samples closest to the boundary line are at best on one of the margin lines.
+
+Since we are still solving for something we can define the width of the margin $M = \frac{2}{\sqrt{w'w}}$ so now we have an objective function to maximize (or minimize the inverse).
+However if our data is not linearly separable then we need to enforce some kind of penalty for misclassified samples, our misclassified points should be close to the boundary.
+We can use the distance (dot product) of the misclassified point to the margin boundary that is should be closest too.
+So our optimization is now to minimize the penalty and the margin width inverse i.e. $min \frac{w'w}{2}+\sum_i^n \epsilon_i$ where $\epsilon_i$ is our misclassification error for $x_i$, further constrained by $w'x+b\geq 1-\epsilon_i$ and $w'x+b\leq -1+\epsilon_i$ for our classifications.
+
+There are more mathematical tricks to simplify/speed up the computation of and SVM, such as the Dual formulation.
+Here we express the SVM optimization as a Lagrangian with non-zero coefficients only for those samples that are on the margin boundaries (support vectors).
+All others points do not influence the margin and can be ignored during our optimization as we only care when our Lagrangian parameters are not zero (support vectors).
+There are also kernel tricks, where projecting non-separable data into a higher dimension using a kernel function that then allow a linear boundary to perfectly separate the labelled data.
+SVM have also been adapted for multi class classification and regression problems
+
+\paragraph{Naive Bayes}
+Naive Bayes is a generative classifier, often used for predicting a categorical variable from a set of categorical observations.
+Specifically we want to learn the parameters $\theta$ for a distribution $P(Y|X,\theta)$ to predict some categorical $Y$ outcome.
+As soon as we start to grow the number of features $n$, even if each feature has only 2 possible vales we will need to learn $2^n$ parameters to define our joint distribution $P(Y|X_1,\dots X_n) = \frac{P(X_1,\dots X_n|Y)P(Y)}{P(X_1,\dots X_n)}$.
+Not only does this quickly becomes intractable (especially for genomic data) but there are likely many pairs of features that can be treated as independent without losing any significant predictive power in the model.
+
+This is the Naivete of the Naive Bayes model, assuming all features are independent so that we can be \st{lazy} efficient.
+So we can redefine our condition distribution $P(X_1,\dots X_n|Y) = \prod_i P(X_i|Y)$, brining us from $2^n$ parameters (most of which were probably useless) to $4n$ parameters.
+Note that thus far our $P()$ function is completely arbitrary still, it can be defined as a Bernoulli or Multinoulli or Gaussian distribution depending on the case.
+So whatever parameters we need to learn are dependant on which probability distribution we decide to use, which is in turn likely dependant on our data and goal.
+
+Since Naive Bayes is simply computing and multiplying a bunch of different conditional probability distributions actually training the model is simply a counting exercise given the data, assuming a Bernoulli or Multinoulli distribution.
+Even in the case of a Gaussian one simply defines a normal distribution with a $\mu,\sigma$ that are computed from subsets of the data for each output class.
+These are formalized with closed form MLE and MAP definitions that will depend on your probability distribution.
+One key issues is that if any distribution $P(X_i|Y) = 0$ then the entire model is ruined by only a single poor parameter, but this can be avoided by sampling adding pseudocounts to avoid a zero and perturb the data as minimally as possible.
+
+Once we have learned our distribution $P(Y,X_1,\dots,X_n)$ we can easily classify a new point $X_{new}$ by simply evaluating $P(Y=i|X_1,\dots,X_n)$ for all $i$ output categories and picking the most probably one.
+
+\paragraph{Random Forest}
+A random forest is a ensemble classification model, which aggregates the predictions of many distinct decisions trees to predict (often) some kind of categorical output.
+This definition likely raises the question "what is a decision tree?".
+A decision tree is essentially a flowchart, where you start at the root and at each node you pick a branch contingent on the data for your sample until you reach a leaf node which reprints the classification label.
+So the problem for a decision tree now becomes "how do I decide what conditions lead to what nodes?".
+This is where information theory comes in, helping to quantify how much information we can gain by splitting the data at a given threshold for a given feature.
+The ideal case is that some split segregates all the labels perfectly (no label mixing in any partion after a split), which we can quantify using the entropy $H$, where a perfect split would correspond to an entropy value of 0.
+This is very rare, but the closer our split is to perfect, the more informative it is and the fewer splits we will likely need to end up with a correct prediction.
+So if we can find splits that minimize entropy we can be sure we are finding the most informative splits possible.
+There are also techniques to prune or modify existing tree to ensure they remain simple and accurate.
+
+It can often be difficult to build a really accurate, robust, \emph{single} decision tree, especially as more continuous features are added.
+But if we can take advantage of the fact that decision trees are very simple and cheap, we can try and aggregate our classification over many different decision trees.
+If we train each decision tree on a random subset of our data we can 1) avoid overfitting of any single tree and 2) ideally grow enough trees that most of our trees are capturing something about the structure of our data.
+We can compensate for the high-variance of the classification by simple building more decision trees so that no individual bad tree can ruin our classification.
+
+Random forests also have the advantage of being incredibly transparent, as each set of decisions leading to a classifications are directly encoded as thresholds among the features.
+Even when looking at a forest you can see which trees voted for which class and what splits they came to that drove that classification.
+
+
+\subsection{Feature Importance}
+Here I sought to examine which features (genes) each of these models prioritized or deemed important for distinguishing deathly and cancerous lung cells.
+I chose the methods explained because they are, at least somewhat, transparent, some connection can be drawn between the parameters learned in eahc model and
+\footnote{Note that due to logistical issues all data presented in the results uses the scikit-learn implementations of the models described but I still have implemented SVM and Naive Bayes myself.}
